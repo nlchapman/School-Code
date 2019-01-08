@@ -1,0 +1,50 @@
+/****************************************
+* SumOfDigits.cpp
+* Nick Chapman - 2018
+* This program finds the sum of a digit
+* by using a recursive function call
+*****************************************/
+#include <iostream>
+#include <string>
+
+
+using namespace std;
+
+//Declares the recursive sumDigits function with pass-by-reference integer arguement
+int sumDigits(int& number);
+
+int main()
+{
+	int userInteger;	//User's non-negative integer input
+	int userIntegerCopy;	//Saves a copy of the user's integer
+
+							//Ask and recieve user integer
+	cout << "Please enter any number of non-negative integers: ";
+	cin >> userInteger;
+
+	userIntegerCopy = userInteger;	//Stores a copy of the user's integer
+
+	//Prints out the sum of the digits, calling the recursive sumDigits function
+	cout << "\nThe sum of the digits of " << userIntegerCopy << " is " << sumDigits(userInteger) << "\n\n";
+	system("PAUSE");
+
+	return 0;
+}
+
+int sumDigits(int& integer)
+{
+	int integerSum = 0;	//Integer to store the sum of the digits
+
+	//recursively calls the sumDigits function, returns original integer if it is only a single integer
+	if (integer / 10 == 0)
+	{
+		return integer;
+	}
+	else
+	{
+		integerSum = integerSum + (integer % 10);
+		integer = integer / 10;
+
+		return integerSum + sumDigits(integer);
+	}
+}

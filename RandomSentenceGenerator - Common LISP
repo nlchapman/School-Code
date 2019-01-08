@@ -1,0 +1,33 @@
+; This function returns a random element of the list choices
+(defun random-elt (choices)
+        "Choose an element from a list at random."
+	  ;; elt returns the (n + 1)th element of the list choices 
+  ;; random returns a random integer no large than the number of
+  ;;   elements in the list choices
+        (elt choices (random (length choices))))
+	
+; This function returns a random element of the given set and returns 
+; it in a list
+(defun one-of (set)
+         "Pick one element of set, and make a list of it."
+         (list (random-elt set)))
+; Define a sentence as a start-word + phrase-connector + end-word
+(defun sentence () (append (start-word) (phrase-connector) (end-word)))
+
+; Define a start-word as a start-sound + sound-connector + end-sound
+(defun start-word () (append (start-sound) (sound-connector) (end-sound)))
+
+; Define an end-word as a start-sound + sound-connector + end-sound
+(defun end-word () (append (start-sound) (sound-connector) (end-sound)))
+
+; This function returns a randomly selected start-sound
+(defun start-sound () (one-of ' (la li le lo lu ka ki ke ko ku)))
+
+; This function returns a randomly selected sound-connector
+(defun sound-connector () (one-of ' (a I e o u)))
+
+; This function returns a randomly selected end-sound
+(defun end-sound () (one-of ' (pa pi pe po pu)))
+
+; This function returns a randomly selected phrase-connector
+(defun phrase-connector () (one-of ' (va vi ve vo vu)))

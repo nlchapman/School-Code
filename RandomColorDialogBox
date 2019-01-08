@@ -1,0 +1,109 @@
+/**********************************************************
+ * CNUnit7Ch17
+ * 
+ * Nick Chapman
+ * 
+ *  A program that displays a dialog box, shows a message 
+ *  and randomly chooses a color for the background and font.
+ ***********************************************************/
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class CNUnit7Ch17 extends JFrame
+{
+	// Created constants to set the width and height for the JFrame
+	public static final int WIDTH = 500;
+	public static final int HEIGHT = 200;
+	
+	public static Color backColor;			// Variable for the background color
+	public static Color fontColor;			// Variable for the font color
+	public static String colorName;			// Variable the name of the background color
+	private static JTextField nameBox;		// Variable for the JTextField to hold the user's name
+	public static JLabel greeting;			// Variable for the JLabel for the personalized greeting
+	
+	//***********************************************************
+	
+	public CNUnit7Ch17()
+	{
+		setTitle("Color Changing Frame");
+		setSize(WIDTH, HEIGHT);
+		setLayout(new FlowLayout());
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		getContentPane().setBackground(backColor);
+		createContent();
+		setVisible(true);
+	
+	}
+	
+	//***********************************************************
+	//  Creates components and adds them to the window
+	
+	public void createContent()
+	{
+		JLabel namePrompt = new JLabel ("What is your name: ");
+		namePrompt.setForeground(fontColor);
+		nameBox = new JTextField(15);
+		greeting = new JLabel();
+		add(namePrompt);
+		add(nameBox);
+		add(greeting);
+		nameBox.addActionListener(
+			new ActionListener()
+			{
+				public void actionPerformed(ActionEvent e)
+				{
+					String message;
+					namePrompt.setVisible(false);
+					nameBox.setVisible(false);
+					
+					message = "Thanks for playing " + nameBox.getText();
+					greeting.setText(message);
+					greeting.setBackground(backColor);
+					greeting.setForeground(fontColor);
+				}
+			}
+		);
+	}
+
+	public static void main(String [] args)
+	{
+		int random;									// Variable for the random color
+		
+		random = (int) (Math.random() * 5) + 1;		// Creates the random number
+		
+		// Switch statement for the five main random colors and corresponding font color
+		switch (random)
+		{
+			case 1:
+				backColor = Color.GREEN;
+				fontColor = Color.BLUE;
+				colorName = "GREEN";
+				break;
+			case 2:
+				backColor = Color.RED;
+				fontColor = Color.WHITE;
+				colorName = "RED";
+				break;
+			case 3:
+				backColor = Color.WHITE;
+				fontColor = Color.BLACK;
+				colorName = "WHITE";
+				break;
+			case 4:
+				backColor = Color.YELLOW;
+				fontColor = Color.BLACK;
+				colorName = "YELLOW";
+				break;
+			case 5:
+				backColor = Color.BLUE;
+				fontColor = Color.WHITE;
+				colorName = "BLUE";
+				break;	
+		}
+
+		JOptionPane.showMessageDialog(null, "The following window color will be randomly chosen from \nRed, White, Yellow, Green Blue \n\n Your color will be: " + colorName, "Message", JOptionPane.INFORMATION_MESSAGE);
+		new CNUnit7Ch17();
+	}  // end main class
+}
